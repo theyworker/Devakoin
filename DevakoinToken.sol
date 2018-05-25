@@ -1,23 +1,21 @@
 pragma solidity ^0.4.23;
 
-
 import './ERC20Interface.sol';
 
 contract DevakoinToken is ERC20Interface
 {
-  uint public constant _totalSupply = 100000;
+  uint public constant _totalSupply = 100000.0000;
   string public constant symbol = "devk";
   string public constant name= "Devakoin";
-//  uint8 public constant decimal = 4;
+  uint8 public constant decimal = 4;
 
   mapping(address=> uint256) balances;
   mapping(address => mapping(address => uint256))allowed;
 
-  function DevakoinToken()
-  {
+  function DevakoinToken(){
   balances[msg.sender] = _totalSupply;
   }
-  function totalSupply() public constant returns (uint256 totalSupply)
+  function gettotalSupply() public constant returns (uint256 totalSupply)
   {
     return _totalSupply;
   }
@@ -36,7 +34,7 @@ contract DevakoinToken is ERC20Interface
   function approve(address _spender, uint _value) public returns (bool success)
   {
     allowed[msg.sender][_spender] = _value;
-    Approval(msg.sender, _spender, _value);
+    emit Approval(msg.sender, _spender, _value);
     return true;
   }
   function transferFrom(address _from, address _to, uint _value) public returns (bool success)
@@ -46,7 +44,7 @@ contract DevakoinToken is ERC20Interface
     balances[_from] -= _value;
     balances[_to] += _value;
     allowed[_from][msg.sender] -= _value;
-    Transfer(_from,_to,_value);
+    emit Transfer(_from,_to,_value);
     return true;
   }
 
@@ -56,4 +54,5 @@ contract DevakoinToken is ERC20Interface
     }
 
       event Approval(address indexed tokenOwner, address indexed spender, uint tokens);
+      event Transfer(address indexed from, address indexed _to, uint _value);
 }
