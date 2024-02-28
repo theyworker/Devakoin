@@ -1,3 +1,3 @@
 # Devakoin
 
-Devakoin is a ERC20 standarnd token running on the Ethereum Blockchain.
+Devakoin is a ERC20 standard token running on the Ethereum Blockchain.
